@@ -3,6 +3,7 @@ import PacientesContext from "../context/PacientesProvider";
 import Alerta from "./Alerta";
 //hooks
 import usePacientes from "../hooks/usePacientes";
+import FormatoFecha from "../helpers/FormatoFecha";
 const Form = () => {
 
   const [paciente,setPaciente] = useState({
@@ -18,8 +19,8 @@ const Form = () => {
 
   useEffect(()=>{
     if(pacienteeditar?.nombre){
+      pacienteeditar.fecha = FormatoFecha(pacienteeditar.fecha)
       setPaciente(pacienteeditar)            
-    
     }
 
 
@@ -48,6 +49,7 @@ const Form = () => {
     setAlerta({})
 
     guardarPaciente(paciente)
+
 
     setPaciente({
         nombre:"",
