@@ -26,6 +26,8 @@
 
 ## Sobre el proyecto
 
+Administrador de pacientes para médicos, la plataforma que permitirá el registro de citas médicas con los datos de cada paciente.
+
 ![product-screenshot](https://i.ibb.co/g3wPDf5/administradospacientes.png)
 
 ### Herramientas Utilizadas
