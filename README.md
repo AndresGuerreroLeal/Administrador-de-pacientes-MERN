@@ -32,7 +32,7 @@ Administrador de pacientes para médicos, la plataforma que permitirá el regist
 
 ### Herramientas Utilizadas
 
-El stack manejado para el proyecto fuero:
+El stack manejado para el proyecto fueron:
 
 * [MongoDB](https://docs.mongodb.com/)
 * [Express](https://expressjs.com/)
