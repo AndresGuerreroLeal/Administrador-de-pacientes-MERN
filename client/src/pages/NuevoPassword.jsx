@@ -46,16 +46,16 @@ const NuevoPassword = () => {
     }
     
     try {
-        const { data } = await clienteAxios.post(
-            `/medico/olvide-password/${token}`,
-            {password}
-            );
-            
-            setPasswordModificado(true)
-            setAlerta({
-                msg: data.msg,
-                error: false,
-            });
+      const { data } = await clienteAxios.post(
+        `/medico/olvide-password/${token}`,
+        { password }
+      );
+
+      setPasswordModificado(true);
+      setAlerta({
+        msg: data.msg,
+        error: false,
+      });
     } catch (err) {
       setAlerta({
         msg: err.response.data.msg,

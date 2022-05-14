@@ -5,7 +5,7 @@ const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
   const [auth, setAuth] = useState({});
-    const [cargando,setCargando] = useState(true)
+  const [cargando,setCargando] = useState(true)
 
 
   useEffect(() => {
