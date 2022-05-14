@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 
 const Fooder = () => {
   return (
@@ -9,6 +9,6 @@ const Fooder = () => {
       </p>
     </footer>
   );
-}
+};
 
-export default Fooder
+export default Fooder;

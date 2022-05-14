@@ -1,77 +1,74 @@
-import React,{useContext, useEffect, useState} from "react";
+import React, { useContext, useEffect, useState } from "react";
 import PacientesContext from "../context/PacientesProvider";
 import Alerta from "./Alerta";
 //hooks
 import usePacientes from "../hooks/usePacientes";
 import FormatoFecha from "../helpers/FormatoFecha";
 const Form = () => {
+  const [paciente, setPaciente] = useState({
+    nombre: "",
+    email: "",
+    fecha: "",
+    sintomas: "",
+  });
 
-  const [paciente,setPaciente] = useState({
-      nombre:"",
-      email:"",
-      fecha:"",
-      sintomas:""
-  })
+  const [alerta, setAlerta] = useState({});
 
-  const [alerta,setAlerta] = useState({})
+  const { guardarPaciente, pacienteeditar } = useContext(PacientesContext);
 
-  const {guardarPaciente,pacienteeditar} = useContext(PacientesContext)
+  useEffect(() => {
+    if (pacienteeditar?.nombre) {
+      pacienteeditar.fecha = FormatoFecha(pacienteeditar.fecha);
+      setPaciente(pacienteeditar);
+    }
+  }, [pacienteeditar]);
 
-  useEffect(()=>{
-    if(pacienteeditar?.nombre){
-      pacienteeditar.fecha = FormatoFecha(pacienteeditar.fecha)
-      setPaciente(pacienteeditar)            
+  const { nombre, email, fecha, sintomas } = paciente;
+
+  const handleChange = (e) => {
+    setPaciente({
+      ...paciente,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if ([nombre, email, fecha, sintomas].includes("")) {
+      setAlerta({
+        msg: "Todos los campos son obligatorios",
+        error: true,
+      });
+      return;
     }
 
+    setAlerta({});
 
-  },[pacienteeditar])
-
-  const {nombre,email,fecha,sintomas} =  paciente
-
-  const handleChange = (e)=>{
-    setPaciente({
-        ...paciente,
-        [e.target.name]:e.target.value
-    })
-  }
-
-  const handleSubmit = (e)=>{
-      e.preventDefault()
-
-    if([nombre,email,fecha,sintomas].includes("")){
-        setAlerta({
-            msg:"Todos los campos son obligatorios",
-            error:true
-        })
-        return
-    }
-
-    setAlerta({})
-
-    guardarPaciente(paciente)
-
+    guardarPaciente(paciente);
 
     setPaciente({
-        nombre:"",
-      email:"",
-      fecha:"",
-      sintomas:"",
-    })
-    
-  }
+      nombre: "",
+      email: "",
+      fecha: "",
+      sintomas: "",
+    });
+  };
 
   const { msg } = alerta;
 
   return (
     <>
-     <h2 className='font-black text-3xl text-center'>Administrador</h2>
-      <p className='text-xl mt-5 mb-10 text-center'>
-      Añade tus pacientes y <span className='text-blue-400 font-bold'> Administralos</span>
-          </p>
+      <h2 className="font-black text-3xl text-center">Administrador</h2>
+      <p className="text-xl mt-5 mb-10 text-center">
+        Añade tus pacientes y{" "}
+        <span className="text-blue-400 font-bold"> Administralos</span>
+      </p>
 
       {msg && <Alerta alerta={alerta} />}
 
-      <form className="px-5 bg-white py-10 b-10 lg:mb-0 rounded-lg shadow-md"
+      <form
+        className="px-5 bg-white py-10 b-10 lg:mb-0 rounded-lg shadow-md"
         onSubmit={handleSubmit}
       >
         <div className="mb-5 ">
@@ -116,9 +113,9 @@ const Form = () => {
             type="date"
             className="border-2 w-full p-2 mt-2 placeholder-gray-400
                  rounded-md"
-                 value={fecha}
-                 onChange={handleChange}
-                 name="fecha"
+            value={fecha}
+            onChange={handleChange}
+            name="fecha"
           />
         </div>
         <div className="mb-5">
