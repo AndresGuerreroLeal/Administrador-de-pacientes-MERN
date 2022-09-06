@@ -12,7 +12,7 @@ app.use("/api/medico", require("./routes/medicoRoutes"));
 app.use("/api/paciente", require("./routes/pacienteRouter"));
 
 app.get("/",(req,res)=>{
-  res.json({msg:"Heroku deploy"})
+  res.json({msg:"Deploy exitoso"})
 })
 
 const PORT = process.env.PORT || 3001;
